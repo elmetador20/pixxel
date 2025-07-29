@@ -41,9 +41,9 @@ const FloatingShapes = () => {
            key={shape.id} 
           className={`absolute ${shape.size} ${shape.position} bg-gradient-to-r ${shape.gradient} rounded-full blur-2xl opacity-40 animate-pulse`}
           
-          // style={{
-          //   transform: `translateY(${scrollY * 0.5}px) rotate(${scrollY * 0.1}deg)`, 
-          // }}
+          style={{
+            transform: `translateY(${scrollY * 0.5}px) rotate(${scrollY * 0.1}deg)`, 
+          }}
           
           
           />

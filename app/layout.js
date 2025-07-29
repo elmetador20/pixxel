@@ -1,11 +1,15 @@
-import { Inter} from "next/font/google";
+
+
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "sonner";
 import FloatingShapes from "@/components/floating-shapes";
 import Header from "@/components/header";
-
-const inter= Inter({subsets:["latin"]});
+import { ClerkProvider} from '@clerk/nextjs'
+import { shadesOfPurple } from "@clerk/themes";
+import { ConvexClientProvider } from "./ConvexClientProvider";
+const inter = Inter({ subsets: ["latin"] });
 
 
 export const metadata = {
@@ -19,18 +23,25 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.className}`}
       >
-       <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Header/>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ConvexClientProvider>
+          <ClerkProvider
+            appearance={{
+              baseTheme: shadesOfPurple,
+            }}>
+            <Header />
             <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
               <FloatingShapes />
-              <Toaster richColors/>
-        {children}
-        </main>
+              <Toaster richColors />
+              {children}
+            </main>
+          </ClerkProvider>
+          </ConvexClientProvider>
         </ThemeProvider>
       </body>
     </html>
