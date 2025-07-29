@@ -1,6 +1,6 @@
 "use client"
 
-import Link from 'next/link'; 
+import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import { BarLoader } from 'react-spinners';
@@ -14,6 +14,7 @@ import {
 } from '@clerk/nextjs'
 import { useStoreUser } from '@/hooks/use-store-user';
 import { Authenticated, Unauthenticated } from 'convex/react';
+import { LayoutDashboard } from 'lucide-react';
 const Header = () => {
   const path = usePathname();
   const { isLoading } = useStoreUser();
@@ -74,6 +75,13 @@ const Header = () => {
             </SignUpButton>
           </Unauthenticated>
           <Authenticated>
+            <Link href="/dashboard">
+              <Button variant="primary" >
+                <LayoutDashboard className='gap-5 h-10 w-22'/>
+                <span className="hidden md:flex">Dashboard</span>
+              </Button>
+
+            </Link>
             <UserButton appearance={{
 
               element: {
