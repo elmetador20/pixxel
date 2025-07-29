@@ -1,20 +1,26 @@
 "use client"
 
-import Link from 'next/link'; // ❗️Use from next/link, not lucide-react
+import Link from 'next/link'; 
 import Image from 'next/image';
 import React from 'react';
+import { BarLoader } from 'react-spinners';
+
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
 import {
-  ClerkProvider,
   SignInButton,
   SignUpButton,
-  SignedIn,
-  SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { useStoreUser } from '@/hooks/use-store-user';
+import { Authenticated, Unauthenticated } from 'convex/react';
 const Header = () => {
   const path = usePathname();
+  const { isLoading } = useStoreUser();
+
+  if (path.includes("/editor")) {
+    return null;
+  }
 
 
   return (
@@ -58,31 +64,35 @@ const Header = () => {
         )
         }
         <div className='flex itmes-centre gap-3 ml-10 md:ml-20'>
-          <SignedOut>
+          <Unauthenticated>
             <SignInButton>
-            <Button variant="glass">Sign-In</Button>
+              <Button variant="glass">Sign-In</Button>
             </SignInButton>
             <SignUpButton>
               <Button variant="primary">Get started</Button>
-              
+
             </SignUpButton>
-          </SignedOut>
-          <SignedIn>
+          </Unauthenticated>
+          <Authenticated>
             <UserButton appearance={{
 
-              element:{
-                avatarBox:"w-8 h-8",
+              element: {
+                avatarBox: "w-8 h-8",
               }
 
             }}
-            
-            
-            
+
+
+
             />
-          </SignedIn>
+          </Authenticated>
 
 
         </div>
+        {isLoading &&
+          <div className='fixed bottom-0 left-0 w-full z-40 flex justify-center'>
+            <BarLoader width={'94%'} color='magenta' />
+          </div>}
       </div>
     </header>
   );

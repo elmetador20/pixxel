@@ -29,19 +29,21 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <ConvexClientProvider>
+          
           <ClerkProvider
             appearance={{
               baseTheme: shadesOfPurple,
             }}>
+              <ConvexClientProvider>
             <Header />
             <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
               <FloatingShapes />
               <Toaster richColors />
               {children}
             </main>
+            </ConvexClientProvider>
           </ClerkProvider>
-          </ConvexClientProvider>
+          
         </ThemeProvider>
       </body>
     </html>
