@@ -1,4 +1,5 @@
 "use client";
+import Pricing from '@/components/pricing';
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 
 // Custom Hooks
@@ -455,7 +456,8 @@ const App = () => {
       <main>
         <HeroSection />
         <FeaturesSection />
-        <PricingSection />
+        <Pricing />
+       
         
         {/* Footer */}
         <footer className="py-20 border-t border-white/10 backdrop-blur-lg bg-white/5">
