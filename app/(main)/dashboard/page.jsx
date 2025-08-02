@@ -6,8 +6,8 @@ import { api } from '@/convex/_generated/api';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { Plus ,Sparkle} from 'lucide-react';
+import { NewProjectModal } from "./_components/new-project-modal";
 import { BarLoader } from 'react-spinners';
-import NewProjectModel from './_components/new-project-model';
 import {
   Dialog,
   DialogContent,
@@ -23,8 +23,8 @@ const Dashboard = () => {
 
   const [showNewProjectModal, setshowNewProjectModal] = useState(false)
 
-  const { data: projects, isLoading } = useConvexQuery(api.project.getUserProjects);
-  //console.log(data);
+  const { data: project, isLoading } = useConvexQuery(api.projects.getUsersProjects);
+ 
   return (
     <div className='min-h-scren pt-32 pb-16'>
       <div className='container mx-auto px-6'>
@@ -62,7 +62,7 @@ const Dashboard = () => {
           </div>
 
         )}
-       <NewProjectModel
+       <NewProjectModal
        isOpen={showNewProjectModal}
        onClose={()=>setshowNewProjectModal(false)}
        
